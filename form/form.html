@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+2:400,700|Lobster&display=swap" rel="stylesheet">
+    <title>Le Petit Plus</title>
+</head>
+
+<body>
+    <form class="container" i="survey-form">
+        <div class="introduction">
+            <h1 class="title title-1" id="title">Inscription</h1>
+            <p class="text" id="description">
+                Merci de renseigner les informations demandées ci-dessous afin de valider votre inscription.
+            </p>
+        </div>
+
+        <div class="form-container">
+            <form class="form" id="survey-form">
+                <div class="infoClient">
+                    <h2 class="title title-2 title-infoClient">Informations personnelles</h2>
+                    <div class="form__group">
+                        <input type="text" class="form__input" id="name" placeholder="Votre Nom" required>
+                        <label for="name" class="form__label" id="name-label">Votre Nom</label>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="email" class="form__input" id="email" placeholder="Votre Email" required>
+                        <label for="email" class="form__label" id="email-label">Votre Email</label>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="number" class="form__input" id="number" placeholder="18" required step="1" min="16" max="99">
+                        <label for="number" class="form__label" id="number-label">Votre Age</label>
+                    </div>
+
+                    <div class="form__message">
+                        <label for="message" class="form__label bold">Message complémentaire (facultatif):</label><br>
+                        <textarea name="" id="message" cols="30" rows="5" class="form__input form__textarea" placeholder="Problèmes de santé, autre ..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="reservation">
+                    <h2 class="title title-2">Informations pour le déroulement de la journée</h2>
+                    <div class="form__group">
+                        <label for="journee" class="form__label bold">Quel jour souhaitez-vous réserver vote petit plus de la journée ?</label>
+                        <select name="journee" id="dropdown">
+                            <option value="lundi" class="form__select-option">Lundi</option>
+                            <option value="mardi" class="form__select-option">Mardi</option>
+                            <option value="mercredi" class="form__select-option">Mercredi</option>
+                            <option value="jeudi" class="form__select-option">Jeudi</option>
+                            <option value="vendredi" class="form__select-option">Vendredi</option>
+                            <option value="samedi" class="form__select-option">Samedi</option>
+                            <option value="samedi" class="form__select-option">Dimanche</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group">
+                        <p class="text bold">Niveau du petit plus</p>
+                        <div class="radio-btn">
+                            <input type="radio" class="radio__input" id="debutant" name="niveau">
+                            <label for="debutant" class="radio__label form__label">
+                                <span class="radio__newBtn"></span>
+                                Débutant
+                            </label>
+                        </div>
+
+                        <div class="radio-btn">
+                            <input type="radio" class="radio__input" id="intermediaire" name="niveau" checked>
+                            <label for="intermediaire" class="radio__label form__label">
+                                <span class="radio__newBtn"></span>
+                                Intermédiaire
+                            </label>
+                        </div>
+
+                        <div class="radio-btn">
+                            <input type="radio" class="radio__input" id="avance" name="niveau">
+                            <label for="avance" class="radio__label form__label">
+                                <span class="radio__newBtn"></span>
+                                Avancé
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <p class="text bold">Quel(s) style(s) de petit plus vous souhaitez ?</p>
+
+                        <div class="check-btn">
+                            <input type="checkbox" class="cours__type-input" id="relaxation" name="styleCours" value="Relaxation">
+                            <label for="relaxation" class="form__label check__label">
+                                <span class="check__newBtn"></span>
+                                Relaxation
+                            </label>
+                        </div>
+
+                        <div class="check-btn">
+                            <input type="checkbox" class="cours__type-input" id="dynamique" name="styleCours" value="Dynamique">
+                            <label for="dynamique" class="form__label check__label">
+                                <span class="check__newBtn"></span>
+                                Dynamique
+                            </label>
+                        </div>
+
+                        <div class="check-btn">
+                            <input type="checkbox" class="cours__type-input" id="tonicite" name="styleCours" value="Tonicité">
+                            <label for="tonicite" class="form__label check__label">
+                                <span class="check__newBtn"></span>
+                                Tonicité
+                            </label>
+                        </div>
+
+                        <div class="check-btn">
+                            <input type="checkbox" class="cours__type-input" id="souplesse" name="styleCours" value="Souplesse">
+                            <label for="souplesse" class="form__label check__label">
+                                <span class="check__newBtn"></span>
+                                Souplesse
+                            </label>
+                        </div>
+
+                        <div class="submit">
+                            <button type="submit" class="submitBtn bold">Réserver &rarr;</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        </div>
+</body>
+
+</html>
