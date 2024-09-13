@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulaire de Commande</title>
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS -->
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto bg-white p-8 shadow-xl rounded-xl border border-gray-200">
+      <h2 class="text-4xl font-bold text-gray-900 mb-8">Formulaire de Commande</h2>
+      
+      <form id="orderForm" action="#" method="POST" class="space-y-8">
+        <!-- Formule details (to be populated dynamically) -->
+        <div id="formuleDetails" class="bg-gray-50 p-6 rounded-md shadow-inner">
+          <!-- Will be populated with formule data -->
+        </div>
+
+        <!-- User input fields -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="mb-4">
+            <label for="fullname" class="block text-gray-700 text-sm font-medium mb-2">Votre nom :</label>
+            <input type="text" id="fullname" name="fullname" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          </div>
+
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Votre email :</label>
+            <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Détails de la personne à piéger</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="mb-4">
+            <label for="prankFullname" class="block text-gray-700 text-sm font-medium mb-2">Nom complet :</label>
+            <input type="text" id="prankFullname" name="prankFullname" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          </div>
+
+          <div class="mb-4">
+            <label for="prankEmail" class="block text-gray-700 text-sm font-medium mb-2">Email :</label>
+            <input type="email" id="prankEmail" name="prankEmail" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div class="mb-4">
+            <label for="prankPhone" class="block text-gray-700 text-sm font-medium mb-2">Téléphone :</label>
+            <input type="tel" id="prankPhone" name="prankPhone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div class="mb-4">
+            <label for="prankAddress" class="block text-gray-700 text-sm font-medium mb-2">Adresse :</label>
+            <input type="text" id="prankAddress" name="prankAddress" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="mb-4">
+            <label for="day" class="block text-gray-700 text-sm font-medium mb-2">Date du prank :</label>
+            <input type="date" id="day" name="day" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          </div>
+
+          <div class="mb-4">
+            <label for="level" class="block text-gray-700 text-sm font-medium mb-2">Niveau de prank :</label>
+            <select id="level" name="level" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+              <option value="gentil">Gentil</option>
+              <option value="méchant">Méchant</option>
+              <option value="cruel">Cruel</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Static Payment Section -->
+        <!-- <div class="bg-gray-50 p-6 rounded-md shadow-inner">
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">Mode de paiement</h4>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center space-x-4">
+              <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300" />
+              <label for="creditCard" class="text-gray-700 text-sm">Carte de Crédit</label>
+            </div>
+            <div class="flex items-center space-x-4">
+              <input type="radio" id="paypal" name="paymentMethod" value="paypal" class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300" />
+              <label for="paypal" class="text-gray-700 text-sm">PayPal</label>
+            </div>
+          </div>
+        </div> -->
+
+        <button type="submit" class="w-full bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Commander</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Fetch the formule ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const formuleId = urlParams.get('id');
+
+    // Fetch the formule from the backend
+    async function fetchFormule(id) {
+      try {
+        const response = await fetch(`http://localhost:8080/formules/${id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch formule');
+        }
+        const formule = await response.json();
+        return formule;
+      } catch (error) {
+        console.error('Error fetching formule:', error);
+        return null;
+      }
+    }
+
+    // Populate the formule details in the form
+    async function populateFormuleDetails() {
+      const formule = await fetchFormule(formuleId);
+
+      if (formule) {
+        document.getElementById('formuleDetails').innerHTML = `
+          <h3 class="text-2xl font-semibold mb-2">${formule.name}</h3>
+          <p class="text-gray-600 mb-4">${formule.description}</p>
+          <p class="text-xl font-semibold text-blue-600">${formule.price} €</p>
+        `;
+      } else {
+        document.getElementById('formuleDetails').innerHTML = '<p class="text-red-500">Formule non trouvée.</p>';
+      }
+    }
+
+    // Handle form submission
+    document.getElementById('orderForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent form from submitting normally
+
+      // Collect form data
+      const orderData = {
+        formuleId: formuleId,
+        userOrdered: {
+          fullname: document.getElementById('fullname').value,
+          email: document.getElementById('email').value,
+        },
+        userToPrank: {
+          fullname: document.getElementById('prankFullname').value,
+          email: document.getElementById('prankEmail').value,
+          phone: document.getElementById('prankPhone').value,
+          address: document.getElementById('prankAddress').value,
+          day: document.getElementById('day').value,
+          level: document.getElementById('level').value
+        },
+        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')?.value
+      };
+
+      // Send the form data to the backend
+      try {
+        const response = await fetch('http://localhost:8080/command', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData),
+        });
+
+        if (response.ok) {
+          alert('Commande effectuée avec succès !');
+          // Optionally redirect the user
+          window.location.href = 'confirmation.html';
+        } else {
+          alert('Erreur lors de la commande.');
+        }
+      } catch (error) {
+        console.error('Error during form submission:', error);
+        alert('Erreur lors de la commande.');
+      }
+    });
+
+    // On document load, populate formule details
+    document.addEventListener('DOMContentLoaded', populateFormuleDetails);
+  </script>
+</body>
+
+</html>
