@@ -278,3 +278,33 @@ section {
     }
   }
   
+  /* Style de la liste des pranks */
+.pranks-list {
+  display: none; /* Masquer par défaut */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.827); /* Fond noir léger */
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 0 0 20px 20px;
+}
+
+/* Afficher la liste des pranks au survol */
+.swiper-slide:hover .pranks-list {
+  display: block;
+}
+
+/* Style des titres des pranks */
+.pranks-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pranks-list li {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
